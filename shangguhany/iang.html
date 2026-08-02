@@ -88,104 +88,35 @@ tr:hover{
       <th>聲母</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>王</td>
-      <td class="phon">ɢwaŋs</td>
-      <td>羣母</td>
-    </tr>
-    <tr>
-      <td>揚</td>
-      <td class="phon">laŋ</td>
-      <td>來母</td>
-    </tr>
-    <tr>
-      <td>明</td>
-      <td class="phon">mraŋ</td>
-      <td>明母</td>
-    </tr>
-    <tr>
-      <td>京</td>
-      <td class="phon">kraŋ</td>
-      <td>見母</td>
-    </tr>
-    <tr>
-      <td>景</td>
-      <td class="phon">kraŋʔ</td>
-      <td>見母</td>
-    </tr>
-    <tr>
-      <td>竟</td>
-      <td class="phon">kraŋs</td>
-      <td>見母</td>
-    </tr>
-    <tr>
-      <td>疆</td>
-      <td class="phon">kaŋ</td>
-      <td>見母</td>
-    </tr>
-    <tr>
-      <td>薑</td>
-      <td class="phon">kaŋ</td>
-      <td>見母</td>
-    </tr>
-    <tr>
-      <td>强</td>
-      <td class="phon">gaŋʔ</td>
-      <td>羣母</td>
-    </tr>
-    <tr>
-      <td>仰</td>
-      <td class="phon">ŋaŋʔ</td>
-      <td>疑母</td>
-    </tr>
-    <tr>
-      <td>迎</td>
-      <td class="phon">ŋraŋs</td>
-      <td>疑母</td>
-    </tr>
-    <tr>
-      <td>兵</td>
-      <td class="phon">praŋ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>丙</td>
-      <td class="phon">praŋʔ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>邴</td>
-      <td class="phon">praŋʔ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>炳</td>
-      <td class="phon">praŋʔ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>柄</td>
-      <td class="phon">praŋʔ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>病</td>
-      <td class="phon">braŋs</td>
-      <td>並母</td>
-    </tr>
-    <tr>
-      <td>秉</td>
-      <td class="phon">praŋʔ</td>
-      <td>幫母</td>
-    </tr>
-    <tr>
-      <td>棅</td>
-      <td class="phon">praŋs</td>
-      <td>幫母</td>
-    </tr>
+  <tbody id="tbl-body">
   </tbody>
 </table>
 </div>
+<script>
+window.addEventListener("load", ()=>{
+    fetch("yang.xml")
+    .then(resp=>resp.text())
+    .then(xmltext=>{
+        const parser=new DOMParser();
+        const xml=parser.parseFromString(xmltext,"text/xml");
+        const words=xml.querySelectorAll("word");
+        let html="";
+        words.forEach(w=>{
+            const char=w.getAttribute("char");
+            const ipa=w.getAttribute("ipa");
+            const sm=w.getAttribute("sm");
+            html+=`<tr>
+<td>${char}</td>
+<td class="phon">${ipa}</td>
+<td>${sm}</td>
+</tr>`;
+        });
+        document.getElementById("tbl-body").innerHTML=html;
+    })
+    .catch(err=>{
+        alert("載入詞庫失敗！\n"+err);
+    });
+});
+</script>
 </body>
 </html>
