@@ -18,27 +18,27 @@
 <word char="長" ipa="taŋʔ / daŋ / daŋs" sm=""/>
 <word char="帳" ipa="taŋs / taŋ" sm=""/>
 <word char="悵" ipa="thaŋs" sm=""/>
-<word char="鬯" ipa="thaŋs" sm="幫母"/>
-<word char="梁" ipa="praŋs" sm="幫母"/>
-<word char="粱" ipa="" sm=""/>
-<word char="方" ipa="" sm=""/>
-<word char="坊" ipa="" sm=""/>
-<word char="枋" ipa="" sm=""/>
-<word char="肪" ipa="" sm=""/>
-<word char="昉" ipa="" sm=""/>
-<word char="瓬" ipa="" sm=""/>
-<word char="放" ipa="" sm=""/>
-<word char="舫" ipa="" sm=""/>
-<word char="芳" ipa="" sm=""/>
-<word char="妨" ipa="" sm=""/>
-<word char="紡" ipa="" sm=""/>
-<word char="彷" ipa="" sm=""/>
-<word char="髣" ipa="" sm=""/>
-<word char="訪" ipa="" sm=""/>
-<word char="房" ipa="" sm=""/>
-<word char="防" ipa="" sm=""/>
-<word char="魴" ipa="" sm=""/>
-<word char="享" ipa="" sm=""/>
+<word char="鬯" ipa="thaŋs" sm=""/>
+<word char="梁" ipa="raŋ" sm=""/>
+<word char="粱" ipa="raŋ" sm=""/>
+<word char="方" ipa="paŋ / baŋ" sm=""/>
+<word char="坊" ipa="paŋ / baŋ" sm=""/>
+<word char="枋" ipa="paŋ" sm=""/>
+<word char="肪" ipa="paŋ / baŋ" sm=""/>
+<word char="昉" ipa="paŋʔ" sm=""/>
+<word char="瓬" ipa="paŋʔ" sm=""/>
+<word char="放" ipa="paŋʔ / paŋs" sm=""/>
+<word char="舫" ipa="pa:ŋs / paŋs" sm=""/>
+<word char="芳" ipa="phaŋ" sm=""/>
+<word char="妨" ipa="phaŋ / phaŋs" sm=""/>
+<word char="紡" ipa="phaŋʔ" sm=""/>
+<word char="彷" ipa="ba:ŋ / pha:ŋ" sm=""/>
+<word char="髣" ipa="phaŋʔ" sm=""/>
+<word char="訪" ipa="phaŋs" sm=""/>
+<word char="房" ipa="ba:ŋ / baŋ" sm=""/>
+<word char="防" ipa="baŋ / baŋs" sm=""/>
+<word char="魴" ipa="baŋ" sm=""/>
+<word char="享" ipa="qhaŋʔ / qhaŋ" sm=""/>
 <word char="畺" ipa="" sm=""/>
 <word char="薑" ipa="" sm=""/>
 <word char="疆" ipa="" sm=""/>
@@ -212,12 +212,12 @@
 <word char="俍" ipa="" sm=""/>
 <word char="孟" ipa="" sm=""/>
 <word char="盟" ipa="" sm=""/>
-<word char="彭" ipa="" sm=""/>
+<word char="彭" ipa="bra:ŋ" sm=""/>
 <word char="臧" ipa="" sm=""/>
 <word char="贓" ipa="" sm=""/>
 <word char="藏" ipa="" sm=""/>
 <word char="桑" ipa="" sm=""/>
-<word char="顙" ipa="" sm=""/>
+<word char="顙" ipa="sŋa:ŋʔ" sm=""/>
 <word char="當" ipa="" sm=""/>
 <word char="黨" ipa="" sm=""/>
 <word char="鏜" ipa="" sm=""/>
@@ -239,12 +239,12 @@
 <word char="隍" ipa="" sm=""/>
 <word char="徨" ipa="" sm=""/>
 <word char="蝗" ipa="" sm=""/>
-<word char="尪" ipa="" sm=""/>
+<word char="尪" ipa="qwa:ŋ" sm=""/>
 <word char="囊" ipa="" sm=""/>
 <word char="曩" ipa="" sm=""/>
 <word char="桁" ipa="" sm=""/>
-<word char="行" ipa="" sm=""/>
-<word char="衡" ipa="" sm=""/>
-<word char="荇" ipa="" sm=""/>
-<word char="杏" ipa="" sm=""/>
+<word char="行" ipa="ga:ŋ / ga:ŋs / gra:ŋ / gra:ŋs" sm=""/>
+<word char="衡" ipa="gra:ŋ" sm=""/>
+<word char="荇" ipa="gra:ŋʔ" sm=""/>
+<word char="杏" ipa="gra:ŋʔ" sm=""/>
 </words>
