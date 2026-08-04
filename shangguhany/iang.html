@@ -33,6 +33,18 @@ body{
 .back:hover{
     background:#f5ede0;
 }
+.search-wrap{
+    width:100%;
+    margin-bottom:16px;
+}
+#search-input{
+    width:100%;
+    padding:10px 14px;
+    border:1px solid #c9bcaa;
+    background:#fffdf8;
+    font-family:"MingLiU","SimSun",serif;
+    font-size:16px;
+}
 h2{
     font-weight:normal;
     letter-spacing:0.2em;
@@ -72,6 +84,7 @@ tr:hover{
     body{background:#fff;}
     table{box-shadow:none;}
     .back{display:none;}
+    .search-wrap{display:none;}
 }
 </style>
 </head>
@@ -79,6 +92,9 @@ tr:hover{
 <div class="container">
     <div class="topbar">
         <a class="back" href="index.html">← 返回主頁</a>
+    </div>
+    <div class="search-wrap">
+        <input id="search-input" placeholder="漢字｜擬音IPA｜聲母" type="text">
     </div>
 <table>
   <thead>
@@ -93,6 +109,9 @@ tr:hover{
 </table>
 </div>
 <script>
+// 存储全部原始行数据
+let rowList = [];
+
 window.addEventListener("load", ()=>{
     fetch("dict.xml")
     .then(resp=>resp.text())
@@ -100,23 +119,54 @@ window.addEventListener("load", ()=>{
         const parser=new DOMParser();
         const xml=parser.parseFromString(xmltext,"text/xml");
         const words=xml.querySelectorAll("word");
-        let html="";
+        rowList = [];
         words.forEach(w=>{
-            const char=w.getAttribute("char");
-            const ipa=w.getAttribute("ipa");
-            const sm=w.getAttribute("sm");
-            html+=`<tr>
-<td>${char}</td>
-<td class="phon">${ipa}</td>
-<td>${sm}</td>
-</tr>`;
+            rowList.push({
+                char:w.getAttribute("char"),
+                ipa:w.getAttribute("ipa"),
+                sm:w.getAttribute("sm")
+            });
         });
-        document.getElementById("tbl-body").innerHTML=html;
+        renderTable("");
     })
     .catch(err=>{
         alert("載入詞庫失敗！\n"+err);
     });
+
+    // 搜索监听
+    const input = document.getElementById("search-input");
+    input.addEventListener("input",(e)=>{
+        const kw = e.target.value.trim();
+        renderTable(kw);
+    });
 });
+
+/**
+ * 根据关键词渲染表格
+ * 匹配：汉字、ipa拟音、声母，大小写不敏感
+ */
+function renderTable(keyword){
+    const tblBody = document.getElementById("tbl-body");
+    let html = "";
+    const k = keyword.toLowerCase();
+    rowList.forEach(item=>{
+        const c = item.char ?? "";
+        const i = item.ipa ?? "";
+        const s = item.sm ?? "";
+        if(keyword === ""
+            || c.includes(keyword)
+            || i.toLowerCase().includes(k)
+            || s.toLowerCase().includes(k))
+        {
+            html+=`<tr>
+<td>${c}</td>
+<td class="phon">${i}</td>
+<td>${s}</td>
+</tr>`;
+        }
+    });
+    tblBody.innerHTML = html;
+}
 </script>
 </body>
 </html>
