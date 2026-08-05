@@ -29,6 +29,11 @@ body{
     background:#fffdf8;
     color:#4b3a28;
     text-decoration:none;
+    /*导航链接允许选中关闭*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 .back:hover{
     background:#f5ede0;
@@ -44,6 +49,11 @@ body{
     background:#fffdf8;
     font-family:"MingLiU","SimSun",serif;
     font-size:16px;
+    /*输入框必须允许选中文本*/
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
 }
 h2{
     font-weight:normal;
@@ -56,6 +66,11 @@ table{
     background:#fffdf8;
     box-shadow:0 2px 12px rgba(92,68,38,0.08);
     border:1px solid #ddd6c9;
+    /*表格整体禁止拖拽选字*/
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 th,td{
     padding:14px 10px;
@@ -80,11 +95,30 @@ tr:hover{
     font-style:italic;
     letter-spacing:0.06em;
 }
+/*复制提示浮层*/
+.toast{
+    position:fixed;
+    left:50%;
+    top:20px;
+    transform:translateX(-50%);
+    background:#222;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:4px;
+    z-index:999;
+    opacity:0;
+    pointer-events:none;
+    transition:0.2s;
+}
+.toast.show{
+    opacity:0.85;
+}
 @media print{
     body{background:#fff;}
     table{box-shadow:none;}
     .back{display:none;}
     .search-wrap{display:none;}
+    .toast{display:none;}
 }
 </style>
 </head>
@@ -108,9 +142,16 @@ tr:hover{
   </tbody>
 </table>
 </div>
+<div class="toast" id="toast"></div>
 <script>
-// 存储全部原始行数据
 let rowList = [];
+const toast = document.getElementById("toast");
+
+function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),1100);
+}
 
 window.addEventListener("load", ()=>{
     fetch("dict.xml")
@@ -132,19 +173,12 @@ window.addEventListener("load", ()=>{
     .catch(err=>{
         alert("載入詞庫失敗！\n"+err);
     });
-
-    // 搜索监听
     const input = document.getElementById("search-input");
     input.addEventListener("input",(e)=>{
         const kw = e.target.value.trim();
         renderTable(kw);
     });
 });
-
-/**
- * 根据关键词渲染表格
- * 匹配：汉字、ipa拟音、声母，大小写不敏感
- */
 function renderTable(keyword){
     const tblBody = document.getElementById("tbl-body");
     let html = "";
@@ -159,13 +193,24 @@ function renderTable(keyword){
             || s.toLowerCase().includes(k))
         {
             html+=`<tr>
-<td>${c}</td>
-<td class="phon">${i}</td>
-<td>${s}</td>
+<td data-dblcopy="${c}">${c}</td>
+<td class="phon" data-dblcopy="${i}">${i}</td>
+<td data-dblcopy="${s}">${s}</td>
 </tr>`;
         }
     });
-    tblBody.innerHTML = html;
+    tblBody.innerHTML=html;
+    tblBody.querySelectorAll("td[data-dblcopy]").forEach(td=>{
+        td.ondblclick = async function(){
+            const text = this.dataset.dblcopy;
+            try{
+                await navigator.clipboard.writeText(text);
+                showToast(`已複製：${text}`);
+            }catch(err){
+                showToast("複製失敗");
+            }
+        }
+    });
 }
 </script>
 </body>
